@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<script type="text/javascript" src="{% static 'product-filter.js' %}"></script>
+			<h3 class="mb-4 border-bottom pb-1">Filters</h3>
+			<!-- Price Filter -->
+			<div class="card mb-4">
+				<h6 class="card-header text-center">SEARCH</h6>
+				
+			
+			<!-- Filter 1 -->
+			<form action="" method='get'>
+				
+					
+						
+					{{forms.form|crispy}}
+						
+						
+					  
+				</div>
+				<!-- Filter 2 -->
+				
+				<button class='btn btn-danger'>Search</button>
+			</form>
+			<!-- Filter 3 -->
+			
+		</div>
+		<div class="col-sm-9">
+			<!-- Products -->
+			<h3 class="mb-4 border-bottom pb-1">
+				CARS
+			</h3>
+			<div class="row">
+				{% for car in cars %}
+				<div class="col-md-4 mb-4">
+					<div class="card shadow">
+					  <a href="{% url 'car_detail' slug=car.slug %}"><img src="{{car.image.url}}" height="200px" class="card-img-top" alt="{{car.name}}"></a>
+					  <div class="card-body">
+						<div class="d-flex bd-highlight">
+							<div class="p-2 flex-fill bd-highlight"><h5>{{car.carmodel}}</h5></div>
+							<div class="p-2 flex-fill bd-highlight"></div>
+							<div class="p-2 flex-fill bd-highlight"><i class="fas fa-map-marker-alt"> {{car.cities}}</i></div>
+						  </div>
+					    <h4><span class="product-price-{{car.id}}">{{car.price}}</span> PLN</h4>
+					  </div>
+					  	<div class="card-footer">
+				         
+							  	<button class="btn btn-sm btn-primary add-to-cart" data-index=""><i class="fa fa-eye"></i></button>
+							  	<button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
+							  	
+					  	</div>
+					</div>
+				</div>
+				{% endfor %}
+				<div class='container'>
+					<div class="row">
+						<div class="col-sm"></div>
+						<div class="col-sm">
+						   
+						   {% if cars.has_other_pages %}
+						   <nav class="col-md-auto" aria-label="Page navigation sample">
+							<ul class='pagination'>
+								
+								{% if cars.has_previous %}
+								<li class='page-item'><a href="?page={{cars.previous_page_number}}" class='page-link'>Previous</a></li>
+								{% else %}
+								<li class='page-item disabled'><a href="#" class='page-link'>Previous</a></li>
+								{% endif %}
+								{% for i in cars.paginator.page_range %}
+								
+								{% if cars.number == i %}
+								<li class='page-item active'><a href="" class='page-link'>{{i}}</a></li>
+								{% else %}
+								<li class='page-item'><a href="?page={{i}}" class='page-link'>{{i}}</a></li>
+								{% endif %}
+									
+								  
+								{% endfor %}
+								
+								
+								{% if cars.has_next %}
+								<li class='page-item '><a href="?page={{cars.next_page_number}}" class='page-link'>Next</a></li>
+								{% else %}
+								<li class='page-item disabled'><a href="" class='page-link'>Next</a></li>
+									
+								{% endif %}
+									
+								
+									
+							</ul>
+						</nav>
+						   {% endif %}
+							   
+						</div>
+						<div class="col-sm"></div>
+					  </div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+  
+{% for car in data %}
+<div class="col-lg-4 col-md-6 mb-4 product-box">
+	<div class="card shadow">
+	  <a href=""><img src="{{car.image.url}}" class="card-img-top" alt="{{car.title}}"></a>
+	  <div class="card-body">
+	    <h5 class="card-text"><a href="">{{product.name}}</a></h5>
+	    <h6>$ {{car.price}}</h6>
+	  </div>
+	  <div class="card-footer">
+	  	<button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i></button>
+	  	<button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
+	  </div>
+	</div>
+</div>
+{% endfor %}

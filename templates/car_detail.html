@@ -1,0 +1,177 @@
+{% extends "main.html" %}
+
+
+
+{% block content %}
+
+
+
+<section>
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+<div class='container mt-5'>
+    <div class='row'>
+        <div class='col-sm-8'>
+            <h3>{{course.title}}</h3>
+    <video
+    id="my-video"
+    class="video-js"
+    controls="auto"
+    preload="auto"
+    width="650"
+    height="400"
+    poster="{{car.image.url}}"
+    data-setup="{
+    }"
+    
+  >
+    <source src="{{car.video.url}}" type="video/mp4" />
+    
+   
+    
+  </video>
+        </div>
+        <div class='col-sm-4'>
+            <h1>{{ car.carmodel }}</h1>
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-fill bd-highlight"><p>{{car.update_date}}</p></div>
+                <div class="p-2 flex-fill bd-highlight"></div>
+                <div class="p-2 flex-fill bd-highlight"><i class="fas fa-map-marker-alt"> {{car.cities}}</i></div>
+              </div>
+            
+            <hr>
+            
+            {% if request.user.is_authenticated %}
+            <div class="d-flex bd-highlight">
+                <div class="p-2 flex-fill bd-highlight"><p>Email Kontakt:</p></div>
+                <div class="p-2 flex-fill bd-highlight"><p>{{car.user.email}}</p></div>
+                <div class="p-2 flex-fill bd-highlight"></div>
+              </div>
+              <div class="d-flex bd-highlight">
+                <div class="p-2 flex-fill bd-highlight"><p>Phone Number:</p></div>
+                <div class="p-2 flex-fill bd-highlight"><p>+48 732 969 014</p></div>
+                <div class="p-2 flex-fill bd-highlight"></div>
+              </div>
+              <hr>
+              <div class="d-flex bd-highlight">
+                <div class="p-2 flex-fill bd-highlight"><p></p></div>
+                <div class="p-2 flex-fill bd-highlight"><p><button type="button" class="btn btn-danger"><a href="{% url 'newconversation' car.user.username %}" class='text-light'><i class="fas fa-envelope" width='25px'> Now Send Message</i></a></button></p></div>
+                <div class="p-2 flex-fill bd-highlight"></div>
+              </div>
+              
+              
+            {% else %}
+            Email Contact : <a href="" class='text-dark'><p>Please login to see E-Mail!</p></a> 
+            {% endif %}
+                
+            
+        </div>
+               
+            
+        
+        </div>
+       
+</div>
+  
+  <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+
+</section>
+<section>
+    <div class='container mt-5'>
+        <div class='row'>
+            <div class='col-sm-2'>
+                <div class="card">
+                    <div class="container mt-2 text-center">
+                      <p>Year : {{car.year}}</p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2'>
+                <div class="card">
+                    <div class="container mt-2 text-center">
+                      <p>Engine:{{car.capacity_engine}}cc</p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2'>
+                <div class="card">
+                    <div class="container mt-2 text-center">
+                      <p>Fuel: {{car.fuel}}</p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2'>
+                <div class="card">
+                    <div class="container mt-2 text-center">
+                      <p>Power:{{car.engine_power}}cm³</p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2'>
+                <div class="card">
+                    <div class="container mt-2 text-center">
+                      <p>KM: {{car.kilometers}} km</p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2'>
+                <div class="card">
+                    <div class="container mt-2 text-center">
+                      <p>Color: {{car.color}}</p>
+                    </div>
+                  </div>
+            </div>
+
+        </div>
+        <div class='container mt-2'>
+            <div class='row'>
+                <div class='col-sm-3'>
+                    <div class="card">
+                        <div class="container mt-2 text-center">
+                          <p>Body : {{car.body_type}}</p>
+                        </div>
+                      </div>
+                </div>
+                <div class='col-sm-3'>
+                    <div class="card">
+                        <div class="container mt-2 text-center">
+                          <p>Condiation: {{car.technical_condiation}}</p>
+                        </div>
+                      </div>
+                </div>
+                <div class='col-sm-3'>
+                    <div class="card">
+                        <div class="container mt-2 text-center">
+                          <p>Transmission: {{car.transmissions}}</p>
+                        </div>
+                      </div>
+                </div>
+                <div class='col-sm-3'>
+                    <div class="card">
+                        <div class="container mt-2 text-center">
+                          <p>Wheel: {{car.wheel}}</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        
+
+    
+    </div>
+    <div class='container'>
+        <hr>
+        
+            <h1>OPIS</h1>
+            <hr><br>
+            <p>{{car.description|safe}}</p>
+            
+    
+        
+    </div>
+</section>
+
+  
+  
+  
+  
+{% endblock %}
